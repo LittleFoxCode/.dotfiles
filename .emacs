@@ -75,7 +75,7 @@
   (telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left)
   (telephone-line-primary-right-separator 'telephone-line-cubed-right)
   (telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-  (telephone-line-height 24)
+  (telephone-line-height 15)
   (telephone-line-evil-use-short-tag t)
   :config (telephone-line-mode t))
 
@@ -109,3 +109,8 @@
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-up-directory
     "l" 'dired-find-file))
+
+
+;; Org-mode cofig
+(use-package org)
+
