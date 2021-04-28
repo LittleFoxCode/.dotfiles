@@ -11,7 +11,7 @@
 (load-theme 'wombat)        ; Loads current preferred color theme
 
 (column-number-mode)        ; Show column on modeline
-(global-display-line-numbers-mode t)   ; Activate linenumbers globally
+;;(global-display-line-numbers-mode t)   ; Activate linenumbers globally
 (dolist (mode '(org-mode-hook
 		term-mode-hook
 		shell-mode-hook
