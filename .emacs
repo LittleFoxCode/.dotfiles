@@ -69,6 +69,7 @@
 
 ;; Config for telephone-line
 (use-package telephone-line
+  :ensure t
   :custom
   (telephone-line-primary-left-separator 'telephone-line-cubed-left)
   (telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left)
@@ -80,12 +81,14 @@
 
 ;; Whichkey config, for when you have a brainfart :^)
 (use-package which-key
+  :ensure t
   :init (which-key-mode)
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 0.3))
 
 (use-package projectile
+  :ensure t
   :diminish projectile-mode
   :config (projectile-mode)
   :bind-keymap
@@ -95,4 +98,14 @@
     (setq projectile-project-search-path '("~/dev/")))
   (setq projectile-switch-project-action #'projectile-dired))
 
-(use-package magit)
+(use-package magit
+  :ensure t)
+
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file))
