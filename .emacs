@@ -11,7 +11,7 @@
 (load-theme 'wombat)        ; Loads current preferred color theme
 
 (column-number-mode)        ; Show column on modeline
-;;(global-display-line-numbers-mode t)   ; Activate linenumbers globally
+(global-display-line-numbers-mode t)   ; Activate linenumbers globally
 (dolist (mode '(org-mode-hook
 		term-mode-hook
 		shell-mode-hook
@@ -42,8 +42,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
+   '(telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -68,10 +67,16 @@
 
 ;; TODO: Use Ivy or Helm??
 
-;; Config for doom-modeline
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1))
+;; Config for telephone-line
+(use-package telephone-line
+  :custom
+  (telephone-line-primary-left-separator 'telephone-line-cubed-left)
+  (telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left)
+  (telephone-line-primary-right-separator 'telephone-line-cubed-right)
+  (telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+  (telephone-line-height 24)
+  (telephone-line-evil-use-short-tag t)
+  :config (telephone-line-mode t))
 
 ;; Whichkey config, for when you have a brainfart :^)
 (use-package which-key
