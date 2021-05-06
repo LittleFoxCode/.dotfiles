@@ -112,5 +112,19 @@
 
 
 ;; Org-mode cofig
-(use-package org)
-
+(use-package org
+  :config
+  (progn
+  (setq org-publish-project-alist
+   '(("lysblog" ;; my blog project (just a name)
+         ;; Path to org files.
+         :base-directory "~/write/blog/lysblog/_org"
+         :base-extension "org"
+         ;; Path to Jekyll Posts
+         :publishing-directory "~/write/blog/lysblog/_posts/"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :headline-levels 4
+         :html-extension "html"
+         :body-only t
+         )))))
