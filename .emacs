@@ -42,7 +42,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
+   '(eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -131,7 +131,12 @@
 
 
 ;; C-c C-k enables char mode for term when using applications with keys in termainal
+;; C-c C-j to return to linemode afterwards
+;; C-c C-p/C-c C-n to go back and forward in prompts
 (use-package term
   :config
   (setq explicit-shell-file-name "bash")
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%&>] *"))
+;; Allows for better color in term-mode
+(use-package eterm-256color
+  :hook (term . eterm-256color-mode))
