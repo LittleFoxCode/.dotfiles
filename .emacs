@@ -129,6 +129,8 @@
          :body-only t
          )))))
 
+
+;; C-c C-k enables char mode for term when using applications with keys in termainal
 (use-package term
   :config
   (setq explicit-shell-file-name "bash")
