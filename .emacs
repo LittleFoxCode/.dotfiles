@@ -128,3 +128,8 @@
          :html-extension "html"
          :body-only t
          )))))
+
+(use-package term
+  :config
+  (setq explicit-shell-file-name "bash")
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%&>] *"))
