@@ -49,21 +49,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; Config for package evil-mode
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-  (setq evil-want-keybinding nil)
-  :config
-  (evil-mode 1))
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
-
 ;; TODO: Use Ivy or Helm??
 
 ;; Config for telephone-line
