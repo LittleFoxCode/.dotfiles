@@ -8,8 +8,6 @@
 (set-fringe-mode 10)        ; Padding around frame edges
 (menu-bar-mode -1)          ; Disable menu bar
 
-(load-theme 'wombat)        ; Loads current preferred color theme
-
 (column-number-mode)        ; Show column on modeline
 (global-display-line-numbers-mode t)   ; Activate linenumbers globally
 (dolist (mode '(org-mode-hook
@@ -23,9 +21,9 @@
 ;; Packages and package config
 (require 'package)
  
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -42,7 +40,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
+   (quote
+    (rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -78,6 +77,15 @@
   (telephone-line-height 15)
   (telephone-line-evil-use-short-tag t)
   :config (telephone-line-mode t))
+
+(use-package zenburn-theme
+  :ensure t
+  :config
+  (load-theme 'zenburn t))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 
 ;; Whichkey config, for when you have a brainfart :^)
 (use-package which-key
@@ -128,6 +136,12 @@
          :html-extension "html"
          :body-only t
          )))))
+
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 
 ;; C-c C-k enables char mode for term when using applications with keys in termainal
