@@ -1,7 +1,7 @@
 ;;Aesthetics
 (setq inhibit-startup-message t)
 (setq visible-bell t)
-
+(setq show-paren-mode t)    ; I like to be able to see the matching parenthesis!
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
@@ -60,7 +60,6 @@
   (telephone-line-primary-right-separator 'telephone-line-cubed-right)
   (telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
   (telephone-line-height 15)
-  (telephone-line-evil-use-short-tag t)
   :config (telephone-line-mode t))
 
 (use-package zenburn-theme
@@ -97,15 +96,14 @@
 (use-package dired
   :ensure nil
   :commands (dired dired-jump)
-  :bind (("C-x C-j" . dired-jump))
-  :config
-  (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-up-directory
-    "l" 'dired-find-file))
-
+  :bind (("C-x C-j" . dired-jump)))
 
 ;; Org-mode cofig
 (use-package org
+  :bind
+  ("C-c l" . org-store-link)
+  ("C-c a" . org-agenda)
+  ("C-c b" . org-iswitchb)
   :config
   (progn
   (setq org-publish-project-alist
