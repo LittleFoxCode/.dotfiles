@@ -104,6 +104,7 @@
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda)
   ("C-c b" . org-iswitchb)
+  ("C-c c" . org-capture)
   :config
   (progn
   (setq org-publish-project-alist
@@ -146,8 +147,8 @@
 
 ;;LANUGAGES
 ;; kotlin config
+;; requires to install ktlint https://github.com/pinterest/ktlint
 (use-package flycheck-kotlin
   :after (flycheck)
   :init (flycheck-kotlin-setup))
-
 ;;; .emacs ends here
