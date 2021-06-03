@@ -1,4 +1,4 @@
-;;Aesthetics
+;;; Code:
 (setq inhibit-startup-message t)
 (setq visible-bell t)
 (setq show-paren-mode t)    ; I like to be able to see the matching parenthesis!
@@ -16,7 +16,7 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))   ; Exclude line numbers from these major modes
 
-(setq x-select-enable-clipboard t) ; Enalbes to paste from other window and vice versa.
+(setq select-enable-clipboard t) ; Enalbes to paste from other window and vice versa.
 
 ;; Packages and package config
 (require 'package)
@@ -41,7 +41,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
+    (flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -137,3 +137,17 @@
 ;; Allows for better color in term-mode
 (use-package eterm-256color
   :hook (term . eterm-256color-mode))
+
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+
+;;LANUGAGES
+;; kotlin config
+(use-package flycheck-kotlin
+  :after (flycheck)
+  :init (flycheck-kotlin-setup))
+
+;;; .emacs ends here
