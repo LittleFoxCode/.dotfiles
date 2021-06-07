@@ -39,9 +39,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   (quote
+    ("~/write/notes/notes.org" "~/write/notes/körkort.org")))
  '(package-selected-packages
    (quote
-    (flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
+    (python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -151,4 +154,20 @@
 (use-package flycheck-kotlin
   :after (flycheck)
   :init (flycheck-kotlin-setup))
+
+;; python config
+;; requires https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/
+
+(use-package python-mode ;; Already installed by default
+  :custom
+  (python-shell-interpreter "python3"))
+
+(use-package lsp-python-ms
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-python-ms)
+                         (lsp)))
+  :init
+  (setq lsp-python-ms-executable (executable-find "python-language-server")))
 ;;; .emacs ends here
+
