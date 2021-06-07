@@ -143,12 +143,22 @@
   :hook (term . eterm-256color-mode))
 
 
+
+;;LANUGAGES checking and lsp
+
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
 
+;;LSP-mode config
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t))
 
-;;LANUGAGES
 ;; kotlin config
 ;; requires to install ktlint https://github.com/pinterest/ktlint
 (use-package flycheck-kotlin
@@ -157,7 +167,6 @@
 
 ;; python config
 ;; requires https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/
-
 (use-package python-mode ;; Already installed by default
   :custom
   (python-shell-interpreter "python3"))
