@@ -39,12 +39,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   (quote
-    ("~/write/notes/notes.org" "~/write/notes/körkort.org")))
+ '(org-agenda-files '("~/write/notes/notes.org" "~/write/notes/körkort.org"))
  '(package-selected-packages
-   (quote
-    (python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
+   '(org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -109,6 +106,7 @@
   ("C-c b" . org-iswitchb)
   ("C-c c" . org-capture)
   :config
+  (setq org-startup-truncated nil)
   (progn
   (setq org-publish-project-alist
    '(("lysblog" ;; my blog project (just a name)
@@ -129,8 +127,19 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-
-
+;; Use web images and import web-media into orgmode
+;; This requires Pandoc!
+(use-package dash
+  :ensure t)
+(use-package esxml
+  :ensure t)
+(use-package request
+  :ensure t)
+(use-package s
+  :ensure t)
+(use-package org-web-tools
+  :ensure t)
+   
 ;; C-c C-k enables char mode for term when using applications with keys in termainal
 ;; C-c C-j to return to linemode afterwards
 ;; C-c C-p/C-c C-n to go back and forward in prompts
