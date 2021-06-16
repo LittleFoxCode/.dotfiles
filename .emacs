@@ -127,19 +127,7 @@
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
-;; Use web images and import web-media into orgmode
-;; This requires Pandoc!
-(use-package dash
-  :ensure t)
-(use-package esxml
-  :ensure t)
-(use-package request
-  :ensure t)
-(use-package s
-  :ensure t)
-(use-package org-web-tools
-  :ensure t)
-   
+  
 ;; C-c C-k enables char mode for term when using applications with keys in termainal
 ;; C-c C-j to return to linemode afterwards
 ;; C-c C-p/C-c C-n to go back and forward in prompts
