@@ -107,6 +107,17 @@
   ("C-c c" . org-capture)
   :config
   (setq org-startup-truncated nil)
+  (setq org-agenda-files (list "~/org/inbox.org"
+			       "~/org/agenda.org")) ;; Input for GTD system
+  (setq org-capture-templates
+	'(("i" "Inbox" entry (file "inbox.org") ;; Capture template for text capture in GTD
+	   "* TODO %?\nTillagt %U")))
+  (setq org-agenda-hide-tags-regexp ".")
+  (setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo   . " ")
+        (tags   . " %i %-12:c")
+        (search . " %i %-12:c")))
   (progn
   (setq org-publish-project-alist
    '(("lysblog" ;; my blog project (just a name)
