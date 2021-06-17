@@ -107,11 +107,14 @@
   ("C-c c" . org-capture)
   :config
   (setq org-startup-truncated nil)
-  (setq org-agenda-files (list "~/org/inbox.org"
+  (setq org-directory "~/org")
+  (setq org-agenda-files (list "~/org/in.org"
 			       "~/org/agenda.org")) ;; Input for GTD system
   (setq org-capture-templates
-	'(("i" "Inbox" entry (file "inbox.org") ;; Capture template for text capture in GTD
-	   "* TODO %?\nTillagt %U")))
+	'(("i" "Inbox" entry (file "in.org") ;; Capture template for text capture in GTD
+	   "* TODO %?\nTillagt %U")
+	  ("e" "Event" entry (file+headline "agenda.org" "Kommande")
+	   "* %? :event:")))
   (setq org-agenda-hide-tags-regexp ".")
   (setq org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
@@ -151,9 +154,22 @@
   :hook (term . eterm-256color-mode))
 
 
-
 ;;LANUGAGES checking and lsp
 
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind
+  (:map company-active-map
+	("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+	("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 (use-package flycheck
   :ensure t
@@ -162,10 +178,16 @@
 ;;LSP-mode config
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-keymap-prefix "C-c l")
+  :bind-keymap
+  ("C-c l" . lsp-command-map)
   :config
   (lsp-enable-which-key-integration t))
+
+(use-package lsp-ui
+  :ensure t
+  :config
+  (setq lsp-ui-sideline-ignore-duplicate t)
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
 ;; kotlin config
 ;; requires to install ktlint https://github.com/pinterest/ktlint
@@ -175,16 +197,10 @@
 
 ;; python config
 ;; requires https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/
-(use-package python-mode ;; Already installed by default
+(use-package python-mode
+  :ensure t
+  :hook (python-mode . lsp-deferred)
   :custom
   (python-shell-interpreter "python3"))
-
-(use-package lsp-python-ms
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-python-ms)
-                         (lsp)))
-  :init
-  (setq lsp-python-ms-executable (executable-find "python-language-server")))
 ;;; .emacs ends here
 
