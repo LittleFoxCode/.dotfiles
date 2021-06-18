@@ -91,7 +91,8 @@
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :bind ("C-x g" . magit))
 
 (use-package dired
   :ensure nil
@@ -114,7 +115,9 @@
 	'(("i" "Inbox" entry (file "in.org") ;; Capture template for text capture in GTD
 	   "* TODO %?\nTillagt %U")
 	  ("e" "Event" entry (file+headline "agenda.org" "Kommande")
-	   "* %? :event:")))
+	   "* %? :event:")
+	  ("a" "Anteckning" entry (file "anteckningar.org")
+	   "* Anteckning (%a)\n Tillagt den %U \n %?")))
   (setq org-agenda-hide-tags-regexp ".")
   (setq org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
