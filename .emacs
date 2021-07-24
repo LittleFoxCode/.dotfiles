@@ -41,7 +41,7 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files '("~/write/notes/notes.org" "~/write/notes/körkort.org"))
  '(package-selected-packages
-   '(org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
+   '(lsp-ui company-box company org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -107,17 +107,14 @@
   ("C-c b" . org-iswitchb)
   ("C-c c" . org-capture)
   :config
+  (setq org-todo-keywords
+	'((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "SOMEDAY(s)" "|" "DONE(d)" "DROPPED(r)")))
   (setq org-startup-truncated nil)
-  (setq org-directory "~/org")
-  (setq org-agenda-files (list "~/org/in.org"
-			       "~/org/agenda.org")) ;; Input for GTD system
+  (setq org-directory "~/write/notes")
+  (setq org-agenda-files (list "~/write/notes/GTD.org")) ;; Input for GTD system
   (setq org-capture-templates
-	'(("i" "Inbox" entry (file "in.org") ;; Capture template for text capture in GTD
-	   "* TODO %?\nTillagt %U")
-	  ("e" "Event" entry (file+headline "agenda.org" "Kommande")
-	   "* %? :event:")
-	  ("a" "Anteckning" entry (file "anteckningar.org")
-	   "* Anteckning (%a)\n Tillagt den %U \n %?")))
+	'(("i" "Inbox" entry (file "GTD.org") ;; Capture template for text capture in GTD
+	   "* TODO %?\nTillagt %U")))
   (setq org-agenda-hide-tags-regexp ".")
   (setq org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
