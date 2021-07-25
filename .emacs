@@ -106,15 +106,15 @@
   ("C-c a" . org-agenda)
   ("C-c b" . org-iswitchb)
   ("C-c c" . org-capture)
+  ("C-c r" . org-refile)
   :config
-  (setq org-todo-keywords
-	'((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "SOMEDAY(s)" "|" "DONE(d)" "DROPPED(r)")))
+  (setq org-agenda-start-on-weekday 1)
   (setq org-startup-truncated nil)
   (setq org-directory "~/write/notes")
   (setq org-agenda-files (list "~/write/notes/GTD.org")) ;; Input for GTD system
   (setq org-capture-templates
 	'(("i" "Inbox" entry (file "GTD.org") ;; Capture template for text capture in GTD
-	   "* TODO %?\nTillagt %U")))
+	   "* TODO %?")))
   (setq org-agenda-hide-tags-regexp ".")
   (setq org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
