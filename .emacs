@@ -111,10 +111,14 @@
   (setq org-agenda-start-on-weekday 1)
   (setq org-startup-truncated nil)
   (setq org-directory "~/write/notes")
-  (setq org-agenda-files (list "~/write/notes/GTD.org")) ;; Input for GTD system
+  (setq org-agenda-files (list "~/write/notes/GTD.org"
+			       "~/write/notes/reference.org")) ;; Input for GTD system
   (setq org-capture-templates
 	'(("i" "Inbox" entry (file "GTD.org") ;; Capture template for text capture in GTD
-	   "* TODO %?")))
+	   "* TODO %?")
+	  ("r" "Reference" entry (file "reference.org")
+	   "* %?")
+	  ))
   (setq org-agenda-hide-tags-regexp ".")
   (setq org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
