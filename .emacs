@@ -8,6 +8,7 @@
 (set-fringe-mode 10)        ; Padding around frame edges
 (menu-bar-mode -1)          ; Disable menu bar
 
+
 (column-number-mode)        ; Show column on modeline
 (global-display-line-numbers-mode t)   ; Activate linenumbers globally
 (dolist (mode '(org-mode-hook
@@ -41,7 +42,7 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files '("~/write/notes/notes.org" "~/write/notes/körkort.org"))
  '(package-selected-packages
-   '(lsp-ui company-box company org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
+   '(javascript-mode js-mode lsp-ui company-box company org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -158,53 +159,62 @@
   :hook (term . eterm-256color-mode))
 
 
-;;LANUGAGES checking and lsp
+;; LANUGAGES checking and lsp
 
-;; (use-package company
-;;   :after lsp-mode
-;;   :hook (lsp-mode . company-mode)
-;;   :bind
-;;   (:map company-active-map
-;; 	("<tab>" . company-complete-selection))
-;;   (:map lsp-mode-map
-;; 	("<tab>" . company-indent-or-complete-common))
-;;   :custom
-;;   (company-minimum-prefix-length 1)
-;;   (company-idle-delay 0.0))
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind
+  (:map company-active-map
+	("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+	("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
 
-;; (use-package company-box
-;;   :hook (company-mode . company-box-mode))
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
-;; (use-package flycheck
-;;   :ensure t
-;;   :init (global-flycheck-mode))
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
-;; ;;LSP-mode config
-;; (use-package lsp-mode
-;;   :commands (lsp lsp-deferred)
-;;   :bind-keymap
-;;   ("C-c l" . lsp-command-map)
-;;   :config
-;;   (lsp-enable-which-key-integration t))
+;;LSP-mode config
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :bind-keymap
+  ("C-c l" . lsp-command-map)
+  :config
+  (lsp-enable-which-key-integration t))
 
-;; (use-package lsp-ui
-;;   :ensure t
-;;   :config
-;;   (setq lsp-ui-sideline-ignore-duplicate t)
-;;   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+(use-package lsp-ui
+  :ensure t
+  :config
+  (setq lsp-ui-sideline-ignore-duplicate t)
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
-;; ;; kotlin config
-;; ;; requires to install ktlint https://github.com/pinterest/ktlint
-;; (use-package flycheck-kotlin
-;;   :after (flycheck)
-;;   :init (flycheck-kotlin-setup))
+;; kotlin config
+;; requires to install ktlint https://github.com/pinterest/ktlint
+(use-package flycheck-kotlin
+  :after (flycheck)
+  :init (flycheck-kotlin-setup))
 
-;; ;; python config
-;; ;; requires https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/
-;; (use-package python-mode
-;;   :ensure t
-;;   :hook (python-mode . lsp-deferred)
-;;   :custom
-;;   (python-shell-interpreter "python3"))
-;; ;;; .emacs ends here
+;; python config
+;; requires https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/
+(use-package python-mode
+  :ensure t
+  :hook (python-mode . lsp-deferred)
+  :custom
+  (python-shell-interpreter "python3"))
+;;; .emacs ends here
 
+(defun js-untabify-on-save ()
+    (untabify (point-min) (point-max)))
+  
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :ensure t
+  :config
+  (add-hook 'before-save-hook #'js-untabify-on-save))
