@@ -126,6 +126,8 @@
         (todo   . " ")
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
+  (setq org-refile-targets
+	'(("reference.org" :maxlevel . 1)))
   (progn
   (setq org-publish-project-alist
    '(("lysblog" ;; my blog project (just a name)
