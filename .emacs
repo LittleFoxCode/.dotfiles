@@ -8,6 +8,7 @@
 (set-fringe-mode 10)        ; Padding around frame edges
 (menu-bar-mode -1)          ; Disable menu bar
 
+
 (column-number-mode)        ; Show column on modeline
 (global-display-line-numbers-mode t)   ; Activate linenumbers globally
 (dolist (mode '(org-mode-hook
@@ -45,6 +46,7 @@
  '(package-selected-packages
    (quote
     (htmlize pyvenv lsp-ui company-box company org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -117,16 +119,22 @@
   (setq org-agenda-start-on-weekday 1)
   (setq org-startup-truncated nil)
   (setq org-directory "~/write/notes")
-  (setq org-agenda-files (list "~/write/notes/GTD.org")) ;; Input for GTD system
+  (setq org-agenda-files (list "~/write/notes/GTD.org"
+			       "~/write/notes/reference.org")) ;; Input for GTD system
   (setq org-capture-templates
 	'(("i" "Inbox" entry (file "GTD.org") ;; Capture template for text capture in GTD
-	   "* TODO %?")))
+	   "* TODO %?")
+	  ("r" "Reference" entry (file "reference.org")
+	   "* %?")
+	  ))
   (setq org-agenda-hide-tags-regexp ".")
   (setq org-agenda-prefix-format
       '((agenda . " %i %-12:c%?-12t% s")
         (todo   . " ")
         (tags   . " %i %-12:c")
         (search . " %i %-12:c")))
+  (setq org-refile-targets
+	'(("reference.org" :maxlevel . 1)))
   (progn
   (setq org-publish-project-alist
    '(("lysblog" ;; my blog project (just a name)
@@ -167,7 +175,7 @@
 
 
 
-;;LANUGAGES checking and lsp
+;; LANUGAGES checking and lsp
 
 (use-package company
   :after lsp-mode
@@ -217,3 +225,12 @@
   ;;(python-shell-interpreter "python3"))
 ;;; .emacs ends here
 
+(defun js-untabify-on-save ()
+    (untabify (point-min) (point-max)))
+  
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :ensure t
+  :config
+  (add-hook 'before-save-hook #'js-untabify-on-save))
