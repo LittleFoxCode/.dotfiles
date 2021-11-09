@@ -39,9 +39,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files '("~/write/notes/notes.org" "~/write/notes/körkort.org"))
+ '(org-agenda-files
+   (quote
+    ("~/write/notes/notes.org" "~/write/notes/körkort.org")))
  '(package-selected-packages
-   '(lsp-ui company-box company org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode)))
+   (quote
+    (htmlize pyvenv lsp-ui company-box company org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -100,6 +103,9 @@
   :bind (("C-x C-j" . dired-jump)))
 
 ;; Org-mode cofig
+(use-package htmlize
+  :ensure t)
+
 (use-package org
   :bind
   ("C-c l" . org-store-link)
@@ -153,6 +159,13 @@
 (use-package eterm-256color
   :hook (term . eterm-256color-mode))
 
+;; python
+(use-package pyvenv
+  :ensure t
+  :config
+  (pyvenv-mode 1))
+
+
 
 ;;LANUGAGES checking and lsp
 
@@ -197,10 +210,10 @@
 
 ;; python config
 ;; requires https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/
-(use-package python-mode
-  :ensure t
-  :hook (python-mode . lsp-deferred)
-  :custom
-  (python-shell-interpreter "python3"))
+;;(use-package python-mode
+  ;;:ensure t
+  ;;:hook (python-mode . lsp-deferred)
+  ;;:custom
+  ;;(python-shell-interpreter "python3"))
 ;;; .emacs ends here
 
