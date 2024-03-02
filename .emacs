@@ -40,9 +40,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   (quote
-    ("~/write/notes/notes.org" "~/write/notes/körkort.org")))
+ '(org-agenda-files '("~/write/notes/notes.org" "~/write/notes/körkort.org"))
  '(package-selected-packages
    '(dap-python dap-mode htmlize pyvenv lsp-ui company-box company org-web-tools request esxml org-yt lsp-mode org-bullets python-mode lsp-python-ms flycheck-kotlin flycheck rainbow-delimiters doom-themes eterm-256color telephone-line evil-collection evil magit projectile which-key doom-modeline use-package evil-visual-mark-mode))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
@@ -113,58 +111,6 @@
   :ensure nil
   :commands (dired dired-jump)
   :bind (("C-x C-j" . dired-jump)))
-
-;; Org-mode cofig
-(use-package htmlize
-  :ensure t)
-
-(use-package org
-  :bind
-  ("C-c l" . org-store-link)
-  ("C-c a" . org-agenda)
-  ("C-c b" . org-iswitchb)
-  ("C-c c" . org-capture)
-  ("C-c r" . org-refile)
-  :config
-  (setq org-agenda-start-on-weekday 1)
-  (setq org-startup-truncated nil)
-  (setq org-directory "~/write/notes")
-  (setq org-agenda-files (list "~/write/notes/GTD.org"
-			       "~/write/notes/reference.org")) ;; Input for GTD system
-  (setq org-capture-templates
-	'(("i" "Inbox" entry (file "GTD.org") ;; Capture template for text capture in GTD
-	   "* TODO %?")
-	  ("r" "Reference" entry (file "reference.org")
-	   "* %?")
-	  ))
-  (setq org-agenda-hide-tags-regexp ".")
-  (setq org-agenda-prefix-format
-      '((agenda . " %i %-12:c%?-12t% s")
-        (todo   . " ")
-        (tags   . " %i %-12:c")
-        (search . " %i %-12:c")))
-  (setq org-refile-targets
-	'(("reference.org" :maxlevel . 1)))
-  (progn
-  (setq org-publish-project-alist
-   '(("lysblog" ;; my blog project (just a name)
-         ;; Path to org files.
-         :base-directory "~/write/blog/lysblog/_org"
-         :base-extension "org"
-         ;; Path to Jekyll Posts
-         :publishing-directory "~/write/blog/lysblog/_posts/"
-         :recursive t
-         :publishing-function org-html-publish-to-html
-         :headline-levels 4
-         :html-extension "html"
-         :body-only t
-         )))))
-
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
   
 ;; C-c C-k enables char mode for term when using applications with keys in termainal
 ;; C-c C-j to return to linemode afterwards
@@ -173,6 +119,7 @@
   :config
   (setq explicit-shell-file-name "bash")
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%&>] *"))
+
 ;; Allows for better color in term-mode
 (use-package eterm-256color
   :hook (term . eterm-256color-mode))
@@ -196,6 +143,6 @@
   :commands lsp)
 
 (use-package lsp-ui :commands lsp-ui-mode)
-;; (use-package dap-mode)
-;; (use-package dap-python)
+
 ;;; .emacs ends here
+
